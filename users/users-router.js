@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
     console.log(req.body)
     Users.insert(userData)
         .then(user => {
-            res.status(201).json(user)
+            res.status(201).json({ message: "user created successfully", user })
         })
         .catch(error => {
             res.status(500).json({ message: "failed to create new user", errorMessage: error.message})
@@ -68,7 +68,7 @@ router.delete("/:id", (req, res) => {
     Users.remove(id)
         .then(deleted => {
             if(deleted) {
-                res.json({ removed: deleted })
+                res.json({ message: "delete successful", removedCount: deleted })
             } else {
                 res.status(404).json({ message: "could not find a user with the given id"})
             }
